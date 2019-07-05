@@ -1,0 +1,4 @@
+{
+    "mongoUri": "mongodb://Kenny:abc123@ds245387.mlab.com:45387/mern_todo",
+    "jwt_secret": "sl_myjsonsecret6464"
+}
