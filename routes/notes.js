@@ -27,7 +27,7 @@ router.get('/:id', auth, (req, res) => {
     Note.findById(req.params.id).then(note => {
         res.json(note)
     }).catch(err => {
-        res.status(404).json({error: 'Nothing was found with that id'})
+        res.json({msg: 'Nothing was found with that id'})
     })
 })
 
@@ -44,7 +44,7 @@ router.post('/', auth, (req, res) => {
         newNote.save().then(result => {
             res.json(result)
         }).catch(err => {
-            res.status(400).json({msg: 'Something went wrong', error: err.message})
+            res.json({msg: 'Something went wrong', error: err.message})
         })
     })
 })

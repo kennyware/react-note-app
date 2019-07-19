@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true }).then(() =>
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors())
 
 app.use('/api/notes/', require('./routes/notes'));
 app.use('/api/users/', require('./routes/users'));

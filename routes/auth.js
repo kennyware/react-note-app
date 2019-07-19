@@ -11,28 +11,39 @@ router.post('/', (req, res) => {
     const { email, password } = req.body;
 
     if(!email || !password) {
-        return res.status(400).json({ msg: 'Please enter all fields.'})
+        return res.json({ msg: 'Please enter all fields.'})
     }
 
     User.findOne({email}).then(user => {
-        if(!user) return res.status(400).json({msg: 'No user was found with that email.'})
+        if(!user) return res.json({msg: 'No user was found with that email.'})
 
         bcrypt.compare(password, user.password).then(match => {
-            if(!match) return res.status(400).json({msg: 'Invalid password'})
+            if(!match) return res.json({msg: 'Invalid password'})
             
             jwt.sign({id: user.id}, config.get('jwt_secret'), {expiresIn: 3600}, (err, token) => {
                 if(err) throw err;
             
-                res.json({token})
+                res.json({token, user: {name: user.first_name.concat(' ',user.last_name)}})
             })
         })
     })  
 })
 
+// GET http://localhost:5000/api/auth/refresh
+router.get('/refresh', auth, (req, res) => {
+    const user = req.user;
+    console.log(user)
+    jwt.sign({id: user.id}, config.get('jwt_secret'), {expiresIn: 3600}, (err, token) => {
+        if(err) throw err;
+    
+        res.json({token})
+    })
+})
+
 // http://localhost:5000/api/auth/user
 router.get('/user', auth, (req, res) => {
     User.findById(req.user.id).select('-password').then(user => {
-        res.json(user)
+        res.json({user})
     })
 })
 
