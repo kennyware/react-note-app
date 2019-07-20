@@ -67,14 +67,12 @@ class App extends Component {
         this.setState({token: data.token, loggedIn: true, showLogin: false})
         localStorage.setItem('token', data.token)
         axios.defaults.headers.common = {'bearer-token': data.token}
+        this.getNotes()
+        axios.defaults.headers.common = {'bearer-token': data.token}
       }
     }).catch(err => {
       return console.log(err)
     })
-  }
-
-  refreshLogin = () => {
-    
   }
 
   register = (first_name, last_name, email, password) => {
