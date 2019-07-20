@@ -40,12 +40,13 @@ body {
 a {
   text-decoration: none;
   color: #444;
+  padding: 10px;
+  transition: all 0.3s ease;
 }
 
 a:hover {
   background: #222;
   color: #eee;
-  padding: 10px;
 }
 
 .active { 
@@ -84,12 +85,12 @@ a:hover {
 .note .delete-btn {
   float: right;
   margin-right: 10px;
-  transition: transform 1s ease;
+  transition: transform 0.8s ease;
 }
 
-.note .close-btn:hover {
+.note .delete-btn:hover {
   cursor: pointer;
-  transform: rotate(360deg)
+  transform: scale(1.5);
 }
 
 .modal {
