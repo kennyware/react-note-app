@@ -68,7 +68,6 @@ class App extends Component {
         localStorage.setItem('token', data.token)
         axios.defaults.headers.common = {'bearer-token': data.token}
         this.getNotes()
-        axios.defaults.headers.common = {'bearer-token': data.token}
       }
     }).catch(err => {
       return console.log(err)
