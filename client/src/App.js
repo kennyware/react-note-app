@@ -43,7 +43,7 @@ class App extends Component {
 
   checkLogin = (token) => {
     axios.defaults.headers.common = {'bearer-token': token}
-    axios.get('http://localhost:5000/api/auth/user').then(res => {
+    axios.get('/api/auth/user').then(res => {
       if(res.data.user){
         this.getNotes()
         this.setState({token: token, loggedIn: true})
@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   login = (email, password) => {
-    axios.post('http://localhost:5000/api/auth', { email, password }).then(res => {
+    axios.post('/api/auth', { email, password }).then(res => {
       const { data } = res;
       if(data.msg){
         return this.setState({httpRes: data.msg})
@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   register = (first_name, last_name, email, password) => {
-    axios.post('http://localhost:5000/api/users', { first_name, last_name, email, password }).then(res => {
+    axios.post('/api/users', { first_name, last_name, email, password }).then(res => {
       if(res.data.token){
         this.setState({token: res.data.token, loggedIn: true})
         localStorage.setItem('token', res.data.token)
@@ -88,7 +88,7 @@ class App extends Component {
 
   delNote = (id) => {
     
-    axios.delete(`http://localhost:5000/api/notes/${id}`).then(res => {
+    axios.delete(`/api/notes/${id}`).then(res => {
       if(res.data.success === true) {
         const newNoteState = this.state.notes.filter(note => note._id !== id);
         this.setState({notes: newNoteState})
@@ -97,7 +97,7 @@ class App extends Component {
   }
 
   addNote = (description) => {
-    axios.post('http://localhost:5000/api/notes', {description}).then(res => {
+    axios.post('/api/notes', {description}).then(res => {
       let newNoteState = this.state.notes;
       newNoteState.push(res.data);
       this.setState({notes: newNoteState});
