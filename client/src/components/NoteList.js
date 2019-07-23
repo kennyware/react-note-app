@@ -6,10 +6,6 @@ export class NoteList extends Component {
        notes: this.props.notes
     }
 
-    // componentDidMount = () => {
-    //     this.setState({notes: this.props.notes})
-    // }
-
     genItems = () => {
         if(this.props.notes.length > 0) {
             return this.props.notes.map((note) => 

@@ -52,7 +52,7 @@ export class Login extends Component {
             <div className="modal">
                 <form className="modal-content" id="login-form" onSubmit={this.onSubmit}>
                     <div className="container">
-                        <h1>Login</h1>
+                        <h1 className="heading">Login</h1>
                         <div className="msg">
                             {this.props.httpRes && <div className="error-msg">{this.props.httpRes}</div>}
                         </div>

@@ -50,13 +50,18 @@ a:hover {
 }
 
 .active { 
-  color: red;
+  color: #b85151 !important;
   text-decoration: underline;
+  font-weight: 900;
 }
 
 .container {
   margin: auto;
   max-width: 95%;
+}
+
+.heading {
+  margin-bottom: 20px;
 }
 
 .note-list {
@@ -70,12 +75,16 @@ a:hover {
   padding-bottom: 10px;
 }
 
-.note span{ 
+.note div{
+  max-width: 49%;
   display: inline-block;
 }
 
 .note .note-title {
   margin-left: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .note .note-date { 
@@ -117,15 +126,6 @@ a:hover {
   padding: 40px 0 60px;
   text-align: center;
 }
-
-/* .modal-content input[type=email], .modal-content input[type=password]{
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  display: inline-block;
-  margin: 10px 0;
-  padding: 10px 12px;
-  width: 100%;
-} */
 
 .modal-content input:not([type=checkbox]){
   box-sizing: border-box;
@@ -229,6 +229,53 @@ a:hover {
   padding: 12px 5px;
 } 
 
+.menu-btn {
+  background: none;
+  outline: none;
+  border: none;
+  float: right;
+  margin-top: 15px;
+  display: none;
+}
+
+.mobile-nav {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #666;
+  overflow: hidden;
+  z-index: 2;
+  transition: width 0.7s ease;
+}
+
+.mobile-nav h2 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2em;
+}
+
+.mobile-nav-list li {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.mobile-nav-list li a {
+  color: black;
+}
+
+.menu-close-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.25em;
+  top: 5px;
+  outline: none;
+}
+
+
 @keyframes popup {
   from { transform: scale(0); }
   to { transform: scale(1); }
@@ -237,4 +284,38 @@ a:hover {
 @keyframes showMsg {
   from { opacity: 0;}
   to { opacity: 1;}
+}
+
+@media only screen and (max-width: 401px) {
+  .nav {
+    display: none;
+  }
+
+  .menu-btn {
+    display: initial;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .heading {
+    text-align: center;
+  }
+
+  #note-form {
+    width: 95%;
+  }
+
+  #note-form input {
+    width: 85%
+  }
+
+  .add-btn {
+    width: 15%
+  }
+
+  .note-list {
+    width: 100%;
+  }
 }

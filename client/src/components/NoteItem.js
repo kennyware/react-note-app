@@ -22,7 +22,8 @@ export class NoteItem extends Component {
         const { title } = this.props;
         return (
             <div className="note">
-                <span>{this.changeDate()}</span><span className="note-title">{title}</span>                
+                <div>{this.changeDate()}</div>
+                <div className="note-title">{title}</div>                
                 <span className="delete-btn" onClick={this.delNote}>x</span>
             </div>
         )
