@@ -10,7 +10,7 @@ export class Signup extends Component {
     render() {
         return (
             <div id="signup">
-                <h1 className="heading">Sign Up</h1>
+                {/* <h1 className="heading">Sign Up</h1> */}
                 <Register register={this.props.register} relocate={this.relocate}/>
             </div>
         )

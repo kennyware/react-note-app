@@ -17,11 +17,6 @@ export class AddNote extends Component {
         // this.countChars(e.target.value.length())
     }
 
-    countChars = () => {
-        
-        return this.state.desc.length;
-    }
-
     btnStyle = () => {
         return this.state.desc ? 'add-btn btn' : 'add-btn btn not-ready'
     }
@@ -31,7 +26,6 @@ export class AddNote extends Component {
             <form onSubmit={this.onSubmit} id="note-form">
                 <input type="text" value={this.state.desc} onChange={this.changeText} placeholder="Type here..." required/>
                 <button type="submit" className={this.btnStyle()}>+</button>
-                <span>{this.countChars()}</span>
             </form>
         )
     }

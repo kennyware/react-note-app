@@ -7,10 +7,6 @@ export class Login extends Component {
         showPassword: false
     }
 
-    closeLogin = () => {
-        this.props.toggleLogin()
-    }
-
     togglePassword = () => {
         this.setState(state => ({showPassword: !state.showPassword}))
     }
@@ -26,6 +22,7 @@ export class Login extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.login(this.state.email, this.state.password)
+        this.props.history.push('/')
     }
 
     changeBtnStyle = () => {
@@ -45,12 +42,16 @@ export class Login extends Component {
             return btnClass
         }
     }
+
+    cancel = (e) => {
+        e.preventDefault()
+        this.props.history.push('/')
+    }
     
     render() {
-        
         return (
-            <div className="modal">
-                <form className="modal-content" id="login-form" onSubmit={this.onSubmit}>
+            <div>
+                <form id="login-form" onSubmit={this.onSubmit}>
                     <div className="container">
                         <h1 className="heading">Login</h1>
                         <div className="msg">
@@ -74,9 +75,8 @@ export class Login extends Component {
                         <div>
                             <button className={this.btnClass()} type="submit">Login</button>
                         </div>
-                    </div>
-                    <div className="container">
-                        <button className="cancel-btn btn" onClick={this.closeLogin}>Cancel</button>
+
+                        <button className="cancel-btn btn" onClick={this.cancel}>Cancel</button>
                     </div>
                 </form>
             </div>

@@ -14,14 +14,19 @@ export class NoteItem extends Component {
 
     }
 
-    delNote = () => {
+    delNote = (e) => {
+        e.stopPropagation();
         this.props.delNote(this.props.id)
+    }
+
+    click = () => {
+        this.props.viewNote(this.props.title)
     }
 
     render() {
         const { title } = this.props;
         return (
-            <div className="note">
+            <div className="note" onClick={this.click}>
                 <div>{this.changeDate()}</div>
                 <div className="note-title">{title}</div>                
                 <span className="delete-btn" onClick={this.delNote}>x</span>

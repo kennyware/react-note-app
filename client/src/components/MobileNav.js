@@ -11,7 +11,6 @@ export class MobileNav extends Component {
 
     login = (e) => {
         e.preventDefault();
-        this.props.toggleLogin()
         this.props.click()
     }
 
@@ -29,7 +28,7 @@ export class MobileNav extends Component {
                     <li><NavLink exact to="/" activeClassName="active" onClick={this.props.click}>Home</NavLink></li>
                     <li><NavLink to="/about" activeClassName="active" onClick={this.props.click}>About</NavLink></li>
                     {!this.props.loggedIn ? [
-                        <li key={0}><a href="!#" onClick={this.login} >Log In</a></li>,
+                        <li key={0}><NavLink to="/login" activeClassName="active" onClick={this.props.click}>Log In</NavLink></li>,
                         <li key={1}><NavLink to="/signup" activeClassName="active" onClick={this.props.click}>Sign Up</NavLink></li>
                     ] 
                     : 

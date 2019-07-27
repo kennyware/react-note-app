@@ -3,11 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 export class Navbar extends Component {
 
-    login = (e) => {
-        e.preventDefault();
-        this.props.toggleLogin()
-    }
-
    logout = (e) => {
        e.preventDefault();
        this.props.logout()
@@ -20,7 +15,7 @@ export class Navbar extends Component {
                     <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
                     <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
                     {!this.props.loggedIn ? [
-                        <li key={0}><a href="!#" onClick={this.login} >Log In</a></li>,
+                        <li key={0}><NavLink to="/login" activeClassName="active">Log In</NavLink></li>,
                         <li key={1}><NavLink to="/signup" activeClassName="active">Sign Up</NavLink></li>
                     ] 
                     : 

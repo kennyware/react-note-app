@@ -3,9 +3,9 @@ import './App.css';
 import Header from './components/Header';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
-import Login from './components/forms/Login';
-import Signup from './components/pages/Signup'
-import { BrowserRouter, Route } from 'react-router-dom'
+import Login from './components/pages/Login';
+import Signup from './components/pages/Signup';
+import { BrowserRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -54,9 +54,9 @@ class App extends Component {
     }).catch(err => this.setState({loggedIn: false}))
   }
 
-  toggleLogin = () => {
-    this.setState((state, props) => ({showLogin: !state.showLogin}))
-  }
+  // toggleLogin = () => {
+  //   this.setState((state, props) => ({showLogin: !state.showLogin}))
+  // }
 
   login = (email, password) => {
     axios.post('/api/auth', { email, password }).then(res => {
@@ -112,20 +112,23 @@ class App extends Component {
         <div className="App">
           <div className="container">
             {this.state.ready && [
-            <Header key={0} loggedIn={this.state.loggedIn} toggleLogin={this.toggleLogin} logout={this.logout}/>,
-            <Route key={1} exact path="/" render={(props) => 
-              <Home {...props} 
-              loggedIn={this.state.loggedIn} 
-              notes={this.state.notes} 
-              delNote={this.delNote}
-              addNote={this.addNote}
-              />} />,
-            <Route key={2} path="/about" component={About} />,
-            <Route key={3} path="/signup" render={(props) => <Signup {...props} register={this.register} />} />,
-            <div key={4}>{this.state.showLogin &&
-              <Login toggleLogin={this.toggleLogin} login={this.login} httpRes={this.state.httpRes}/>
-            }</div>
-          ]
+              <Header key={0} loggedIn={this.state.loggedIn} toggleLogin={this.toggleLogin} logout={this.logout}/>,
+              <Route key={1} exact path="/" render={(props) => 
+                <Home {...props} 
+                loggedIn={this.state.loggedIn} 
+                notes={this.state.notes} 
+                delNote={this.delNote}
+                addNote={this.addNote}
+                />} />,
+              <Route key={2} path="/about" component={About} />,
+              <Route key={3} path="/signup" render={props => <Signup {...props} register={this.register} />} />,
+              <Route key={4} path="/login" render={props => 
+                <Login {...props}
+                  login={this.login} 
+                  httpRes={this.state.httpRes}
+                />}
+              />
+            ]
           }
           </div>
         </div>

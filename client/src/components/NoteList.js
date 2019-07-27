@@ -25,7 +25,6 @@ export class NoteList extends Component {
     render() {
         return (
             <div className="note-list">
-                {/* {this.genItems()} */}
                 {this.props.notes.length > 0 ? (this.props.notes.map((note) => 
                 <NoteItem  
                     key={note._id} 
@@ -33,6 +32,7 @@ export class NoteList extends Component {
                     title={note.description}
                     date={note.date}
                     delNote={this.props.delNote}
+                    viewNote={this.props.viewNote}
                 />))
                 :
                 ('You currently have no notes')}

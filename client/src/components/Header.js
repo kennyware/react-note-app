@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom';
 import Navbar from './Navbar';
 import MobileNav from './MobileNav'
 
@@ -11,11 +12,15 @@ export class Header extends Component {
     click = () => {
         this.setState((state) => ({showNav: !state.showNav}))
     }
+
+    goHome = () => {
+
+    }
     
     render() {
         return (
             <header className="header">
-                <h1>Note8</h1>
+                <h1 onClick={this.goHome}><NavLink to="/" className="logo" exact>Note8</NavLink></h1>
                 <Navbar loggedIn={this.props.loggedIn} toggleLogin={this.props.toggleLogin} logout={this.props.logout} />
                 <MobileNav loggedIn={this.props.loggedIn} toggleLogin={this.props.toggleLogin} logout={this.props.logout} show={this.state.showNav} click={this.click} />
                 <button className="menu-btn" onClick={this.click}>
