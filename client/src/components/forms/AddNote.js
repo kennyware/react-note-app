@@ -24,7 +24,7 @@ export class AddNote extends Component {
     render() {
         return (
             <form onSubmit={this.onSubmit} id="note-form">
-                <input type="text" value={this.state.desc} onChange={this.changeText} placeholder="Type here..." required/>
+                <input type="text" value={this.state.desc} onChange={this.changeText} placeholder="Add note..." required/>
                 <button type="submit" className={this.btnStyle()}>+</button>
             </form>
         )

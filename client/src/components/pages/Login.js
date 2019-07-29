@@ -22,16 +22,7 @@ export class Login extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.login(this.state.email, this.state.password)
-        this.props.history.push('/')
-    }
-
-    changeBtnStyle = () => {
-        if(this.state.email === '' || this.state.password === ''){
-            return { backgroundColor: 'grey' }
-        }
-        else {
-            return { backgroundColor: '#4CAF50' }
-        }
+        this.props.history.push('/?page=' + 1)
     }
 
     btnClass = () => {
@@ -83,7 +74,5 @@ export class Login extends Component {
         )
     }
 }
-
-// let btnClass = 'login-btn btn';
 
 export default Login
