@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import NoteItem from './NoteItem';
 
 export class NoteList extends Component {
-    state = {
-       notes: this.props.notes
-    }
 
     genItems = () => {
         if(this.props.notes.length > 0) {

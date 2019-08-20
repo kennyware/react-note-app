@@ -28,7 +28,6 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    // const param = new URLSearchParams(window.location.search).get('page')
     
     if(localStorage.getItem('token')) {
       this.checkLogin(localStorage.getItem('token'))
@@ -52,37 +51,30 @@ class App extends Component {
 
   getNotes = () => {
     axios.get('/api/notes').then(res => {
-      if(res.data.msg) {
-        return (
-          // this.logout(),
-          console.log(res.data.msg)
-        )
-      }
-      this.setState({notes: res.data}, () => {
-        const param = new URLSearchParams(window.location.search).get('page')
+      if(!res.data.msg) {
+        this.setState({notes: res.data}, () => {
+          const param = new URLSearchParams(window.location.search).get('page')
+          // check url params
+          if(param) {
+            
+            const pageNumbers = [];
+            for(let i = 1; i <= Math.ceil(res.data.length / this.state.notesPerPage); i++) {
+                pageNumbers.push(i)
+            }
+            
 
-        if(param) {
+            if(parseInt(param) === 0){
+              window.location.href = window.location.origin + '/404';
+            } else if(parseInt(param.toString()) > pageNumbers.length) {
+              window.location.href = window.location.origin + `/?page=${pageNumbers.length}`
+            }
+            this.paginate(parseInt(param.toString()))
+          } else if(window.location.href === `${window.location.origin}/`){
+              window.location.href = window.location.origin + '/?page=1'
+          }
           
-          const pageNumbers = [];
-          for(let i = 1; i <= Math.ceil(res.data.length / this.state.notesPerPage); i++) {
-              pageNumbers.push(i)
-          }
-           
-
-          if(parseInt(param) === 0){
-            window.location.href = window.location.origin + '/404';
-          } else if(parseInt(param.toString()) > pageNumbers.length) {
-            window.location.href = window.location.origin + `/?page=${pageNumbers.length}`
-          }
-
-          this.paginate(parseInt(param.toString()))
-        } else if(window.location.href === `${window.location.origin}/`){
-            window.location.href = window.location.origin + '/?page=1'
-        } else {
-          console.log('Else')
-        }
-        
-      });
+        });
+      }
     }).catch(err => console.log(err))
   }
 
@@ -129,7 +121,9 @@ class App extends Component {
     axios.delete(`/api/notes/${id}`).then(res => {
       if(res.data.success === true) {
         const newNoteState = this.state.notes.filter(note => note._id !== id);
-        this.setState({notes: newNoteState}, () => this.setPage());
+        this.setState({notes: newNoteState}, () => {
+          this.setPage()
+        });
       } else {
         this.logout();
       }
@@ -141,7 +135,13 @@ class App extends Component {
       if(res.data) {
         let newNoteState = this.state.notes;
         newNoteState.push(res.data);
-        this.setState({notes: newNoteState}, () => this.setPage());
+        this.setState({notes: newNoteState}, () => {
+          if(this.state.currentPage > 0){
+            this.paginate(this.state.currentPage)
+          } else {
+            this.paginate(1)
+          }
+        });
       } else {
         this.logout();
       }
